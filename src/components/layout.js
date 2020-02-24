@@ -4,6 +4,8 @@ import { useStaticQuery, graphql } from "gatsby"
 import Header from "./header"
 import "./layout.css"
 
+export const HEADER_WIDTH = 250;
+
 const Layout = ({ children }) =>
 {
   const data = useStaticQuery(graphql`
@@ -17,12 +19,10 @@ const Layout = ({ children }) =>
   `)
 
   return (
-    <div style={{display: "inline-flex",height: "100vh", width: "100%"}}>
+    <div style={styles.layoutContainer}>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div style={{margin: `0 auto`,maxWidth: 960,padding: `0 1.0875rem 1.45rem`,}}>
-        <main>
-			{children}
-		</main>
+      <div style={styles.layoutContent}>
+        <main style={styles.main}> {children} </main>
         <footer style={styles.footer}>
           © {new Date().getFullYear()}
         </footer>
@@ -34,10 +34,24 @@ const Layout = ({ children }) =>
 export default Layout;
 
 const styles = {
+	layoutContainer: {
+		display: "inline-flex",
+		height: "100vh",
+		width: "100%",
+		minHeight: 200
+	},
+	layoutContent: {
+		width: `calc(100% - ${HEADER_WIDTH}px)`,
+		height: "100%"
+	},
+	main: {
+		width: "100%",
+		height: "100%"
+	},
 	footer: {
 		position: "absolute",
 		bottom: 0,
-		left: 150,
+		left: HEADER_WIDTH/2,
 		transform: "translateX(-50%)",
 		color: "white"
 	}
