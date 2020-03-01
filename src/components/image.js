@@ -2,11 +2,11 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
-const Image = (props) => 
+const UploadMyImage = (props) => 
 {
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "gatsby-astronaut.png" }) {
+      car: file(relativePath: { eq: "car.png" }) {
         childImageSharp {
           fluid(maxWidth: 300) {
             ...GatsbyImageSharpFluid
@@ -19,4 +19,4 @@ const Image = (props) =>
   return <Img fluid={data[props.name].childImageSharp.fluid} />
 }
 
-export default Image;
+export default UploadMyImage;
