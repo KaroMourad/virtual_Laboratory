@@ -124,11 +124,11 @@ class SecondPage extends React.Component
                             </button>
                             <div className={styles.about}>
                                 <div>
-                                    <span>before crash:</span>
+                                    <span>before hit:</span>
                                     <span>Vb = V0 {this.state.circleDelta > 0 ? ` = ${this.state.circleDelta}` : ""}</span>
                                 </div>
                                 <div>
-                                    <span>after crash:</span>
+                                    <span>after hit:</span>
                                     <span>Vb = - (V0 - 2*Vc) {this.state.circleDelta > 0 ? "" : ` = ${this.state.circleDelta}`}</span>
                                 </div>
                             </div>
