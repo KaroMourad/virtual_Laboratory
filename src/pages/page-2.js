@@ -2,10 +2,11 @@ import React from "react"
 import Layout, {HEADER_WIDTH} from "../components/layout"
 import SEO from "../components/seo"
 import Car from "../images/car.jpg"
-import {style} from "typestyle";
+import Info from "../components/page2/info";
+import Control from "../components/page2/control";
 
-const initialCircleVel = 14;
-const initialCarVel = 3;
+const initialCircleVel = 16;
+const initialCarVel = 7;
 
 const initialRadius = 25;
 
@@ -68,7 +69,7 @@ class SecondPage extends React.Component
 
     render()
     {
-        const {width, height, circleDelta, carDelta, startClicked} = this.state;
+        const {width, height, startClicked, carDelta, circleDelta} = this.state;
         return (
             <Layout>
                 <SEO title="Page two"/>
@@ -83,53 +84,17 @@ class SecondPage extends React.Component
                         CANVAS DOES NOT SUPPORTED!
                     </canvas>
                     {width && height ? (
-                        <div style={{height: `calc(100% - ${height + 10})px`, padding: 10}}>
-                            <div style={{display: "inline-flex", flexDirection: "column"}}>
-                                <div className={styles.rangeContainer}>
-                                    <div>
-                                        <label htmlFor="ball">ball velocity</label>:
-                                        <input
-                                            id="ball"
-                                            type="range"
-                                            min="1"
-                                            max="20"
-                                            step="1"
-                                            style={{margin: "0 10px"}}
-                                            onChange={this.handleChangeRange}
-                                            value={circleDelta}
-                                        />
-                                        {circleDelta}
-                                    </div>
-                                    <div>
-                                        <label htmlFor="car">car velocity</label>:
-                                        <input
-                                            id="car"
-                                            type="range"
-                                            min="0"
-                                            max="20"
-                                            step="1"
-                                            style={{margin: "0 10px"}}
-                                            onChange={this.handleChangeRange}
-                                            value={carDelta}
-                                        />
-                                        {carDelta}
-                                    </div>
-                                </div>
-                                <div className={styles.about}>
-                                    <div>
-                                        <span>before hit</span>:
-                                        <span>Vb = V0 {circleDelta > 0 ? ` = ${circleDelta}` : ""}</span>
-                                    </div>
-                                    <div>
-                                        <span>after hit</span>:
-                                        <span>Vb = - (V0 - 2*Vc) {circleDelta > 0 ? "" : ` = ${circleDelta}`}</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <button style={{marginLeft: 20, width: 80, height: 30}} onClick={this.handleStart}>
-                                {startClicked ? "Init" : "Start"}
-                            </button>
-                        </div>
+                        <>
+                            <Control
+                                height={height}
+                                circleDelta={circleDelta}
+                                carDelta={carDelta}
+                                startClicked={startClicked}
+                                handleChangeRange={this.handleChangeRange}
+                                handleStart={this.handleStart}
+                            />
+                            <Info circleDelta={circleDelta}/>
+                        </>
                     ) : null}
                 </div>
             </Layout>
@@ -166,8 +131,8 @@ class SecondPage extends React.Component
                 this.line(this.state.width, this.state.height, border);
                 this.circle(this.state.xCircle, this.state.yCircle, initialRadius);
                 this.ctx.drawImage(this.image, this.state.xCar, this.state.yCar, initialCarWidth, initialCarHeight);
-                this.start()
-            }, 20)
+                this.start();
+            }, 20);
         })
     };
 
@@ -266,7 +231,7 @@ class SecondPage extends React.Component
             this.initialHeight = (window_height * 7 / 10);
 
             this.initialWidth = this.initialWidth < 800 ? 780 : this.initialWidth;
-            
+
             /*car coordinates*/
             this.initial_X_Car = this.initialWidth / 2;
             this.initial_Y_Car = this.initialHeight / 2;
@@ -288,46 +253,8 @@ export default SecondPage;
 
 const styles = {
     canvasContainer: {
+        position: "relative",
         width: "100%",
         height: "100%",
-    },
-    about: style({
-        borderTop: "1px dotted grey",
-        marginLeft: 20,
-        marginTop: 10,
-        paddingTop: 10,
-        "$nest": {
-            "& > div": {
-                display: "flex"
-            },
-            "& > div:last-child": {
-                paddingTop: 10
-            },
-            "& > div > span:first-child": {
-                textAlign: "left",
-                width: 100
-            },
-            "& > div > span:last-child": {
-                textAlign: "left",
-                marginLeft: 10,
-                width: 220
-            }
-        }
-    }),
-    rangeContainer: style({
-        marginLeft: 20,
-        $nest: {
-            "& > div": {
-                display: "flex",
-                alignItems: "center"
-            },
-            "& > div:last-child": {
-                paddingTop: 10
-            },
-            "& > div > label": {
-                width: 100,
-                textAlign: "left"
-            }
-        }
-    }),
+    }
 };
