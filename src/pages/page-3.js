@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react"
+import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {style} from "typestyle";
@@ -6,130 +6,161 @@ import Graphic from "../components/page3/graphic";
 import Info from "../components/page3/info";
 import Animation from "../components/page3/animation";
 
-let initialDelta1 = 300;
-let initialDelta2 = 0;
-const dDelta = initialDelta1 / 100;
-
-let delta1 = initialDelta1;
-let delta2 = initialDelta2;
-let t = 0;
-const ThirdPage = (props) =>
+class ThirdPage extends React.Component
 {
-    const [startClicked, setStartClick] = useState(false);
-    const [marginLeft1, setMarginLeft1] = useState(0);
-    const [marginLeft2, setMarginLeft2] = useState(0);
+    requestRef1;
+    requestRef2;
+    dDelta;
+    timeStart;
 
-    const requestRef1 = React.useRef(0);
-    const requestRef2 = React.useRef(0);
-
-    useEffect(() =>
+    constructor(props)
     {
-        if (startClicked)
-        {
-            requestRef1.current = requestAnimationFrame(start1);
-            requestRef2.current = requestAnimationFrame(start2)
-        } else
-        {
-            init();
-        }
-    }, [startClicked]);
+        super(props);
 
-    useEffect(() =>
+        this.state = {
+            initialDelta1: 1.5,
+            initialDelta2: 0,
+            startClicked: false,
+            marginLeft1: 0,
+            marginLeft2: 0,
+            delta1: 1.5,
+            delta2: 0,
+            restart: true,
+        }
+        this.requestRef1 = React.createRef();
+        this.requestRef2 = React.createRef();
+        this.dDelta = this.state.initialDelta1 / (200 / this.state.initialDelta1 - 1);
+        this.timeStart = 0;
+    }
+
+    componentDidUpdate(prevProps, prevState)
     {
-        if (marginLeft1 === 0 && marginLeft2 === 0)
+        if (prevState.startClicked !== this.state.startClicked)
         {
-            cancelAnimation();
+            if (this.state.startClicked)
+            {
+                this.setState({
+                    restart: false
+                });
+                this.timeStart = Date.now();
+                this.requestRef1.current = requestAnimationFrame(this.start1);
+                this.requestRef2.current = requestAnimationFrame(this.start2)
+            } else
+            {
+                this.init();
+            }
         }
-    }, [marginLeft1, marginLeft2]);
+    }
 
-    return (
-        <Layout>
-            <SEO title="Page three"/>
-            <div className={styles.container}>
-                <div className={styles.graphicContainer}>
-                    <Graphic/>
-                    <Info/>
+    render()
+    {
+        const {initialDelta1, marginLeft1, marginLeft2, startClicked, delta1, delta2, restart} = this.state;
+        return (
+            <Layout>
+                <SEO title="Page three"/>
+                <div className={styles.container}>
+                    <div className={styles.graphicContainer}>
+                        <Graphic
+                            velocity1={delta1}
+                            velocity2={delta2}
+                            timeStart={this.timeStart}
+                            initialDelta1={initialDelta1}
+                            restart={restart}
+                        />
+                        <Info
+                            handleStart={this.handleStart}
+                            startClicked={startClicked}
+                            initialValue={initialDelta1}
+                            onchange1={this.onchange1}
+                        />
+                    </div>
+                    <Animation
+                        marginLeft1={marginLeft1}
+                        marginLeft2={marginLeft2}
+                    />
                 </div>
-                <Animation
-                    marginLeft1={marginLeft1}
-                    marginLeft2={marginLeft2}
-                    handleStart={handleStart}
-                    startClicked={startClicked}
-                    vel1={delta1}
-                    vel2={delta2}
-                    onchange1={onchange1}
-                    onchange2={onchange2}
-                />
-            </div>
-        </Layout>
-    );
+            </Layout>
+        );
+    };
 
-    function onchange1(e)
+    onchange1 = (e) =>
     {
-        // delta1 = +e.target.value * 5;
+        this.setState({
+            initialDelta1: +e.target.value,
+            initialDelta2: 0
+        }, this.init);
     }
 
-    function onchange2(e)
+    handleStart = () =>
     {
-        // delta2 = +e.target.value * 5;
+        this.setState((state) => ({
+            startClicked: !state.startClicked,
+        }));
     }
 
-    function handleStart()
+    start1 = () =>
     {
-        setStartClick(prevStartClicked => !prevStartClicked);
-    }
-
-    function start1()
-    {
-        setMarginLeft1(prevMarginLeft1 =>
+        this.setState(state =>
         {
-            let delta = delta1;
-            if (prevMarginLeft1 + delta / 100 < 100)
+            if (state.delta1 > 0 && state.marginLeft1 + state.delta1 < 100)
             {
-                delta1 = delta - dDelta;
-                console.log("delta1", delta1, t++, "prevMarginLeft1", prevMarginLeft1);
-                requestRef1.current = requestAnimationFrame(start1);
-                return prevMarginLeft1 + delta / 100;
+                this.requestRef1.current = requestAnimationFrame(this.start1);
+                return {
+                    marginLeft1: state.marginLeft1 + state.delta1,
+                    delta1: state.delta1 - this.dDelta
+                };
             } else
             {
-                return prevMarginLeft1;
+                return {
+                    marginLeft1: 100,
+                    delta1: 0
+                };
             }
         });
     }
 
-    function start2()
+    start2 = () =>
     {
-        setMarginLeft2(prevMarginLeft2 =>
+        this.setState(state =>
         {
-            let delta = delta2;
-            if (prevMarginLeft2 + delta / 100 < 100)
+            if (state.delta2 < state.initialDelta1 && state.marginLeft2 + state.delta2 < 100)
             {
-                delta2 = delta + dDelta;
-                //console.log("delta2", delta2, t++);
-                requestRef2.current = requestAnimationFrame(start2);
-                return prevMarginLeft2 + delta / 100;
+                this.requestRef2.current = requestAnimationFrame(this.start2);
+                return {
+                    marginLeft2: state.marginLeft2 + state.delta2,
+                    delta2: state.delta2 + this.dDelta
+                };
             } else
             {
-                return prevMarginLeft2;
+                return {
+                    marginLeft2: 100,
+                    delta2: state.initialDelta1
+                };
             }
         });
     }
 
-    function init()
+    init = () =>
     {
-        cancelAnimation();
-        setMarginLeft1(0);
-        setMarginLeft2(0);
-        delta1 = initialDelta1;
-        delta2 = initialDelta2;
+        const {initialDelta1, initialDelta2} = this.state;
+        this.dDelta = initialDelta1 / (200 / initialDelta1 - 1);
+        this.cancelAnimation();
+        this.timeStart = 0;
+        this.setState({
+            delta1: initialDelta1,
+            delta2: initialDelta2,
+            marginLeft1: 0,
+            marginLeft2: 0,
+            restart: true,
+        });
     }
 
-    function cancelAnimation()
+    cancelAnimation = () =>
     {
-        cancelAnimationFrame(requestRef1.current);
-        cancelAnimationFrame(requestRef2.current);
+        cancelAnimationFrame(this.requestRef1.current);
+        cancelAnimationFrame(this.requestRef2.current);
     }
-};
+}
 
 export default ThirdPage;
 
