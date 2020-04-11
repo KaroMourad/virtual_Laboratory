@@ -36,7 +36,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
         <div className={styles.graphic}>
             V(t)
             <ResponsiveContainer width="90%" height="90%">
-                <AreaChart data={data} margin={{top: 5, right: 10, bottom: 0, left: -15}}>
+                <AreaChart data={data} margin={{top: 15, right: 10, bottom: 0, left: -15}}>
                     <defs>
                         <linearGradient id={id1} x1="0" y1="0" x2="0" y2="1">
                             <stop offset="5%" stopColor={color1} stopOpacity={0.8}/>

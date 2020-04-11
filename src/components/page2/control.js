@@ -50,7 +50,6 @@ const styles = {
     button: {
         marginLeft: 20,
         width: 80,
-        height: 30
     },
     rangeContainer: style({
         marginLeft: 20,
@@ -63,7 +62,7 @@ const styles = {
                 paddingTop: 10
             },
             "& > div > label": {
-                width: 100,
+                minWidth: 120,
                 textAlign: "left"
             }
         }

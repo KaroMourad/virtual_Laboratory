@@ -8,10 +8,10 @@ const Header = ({siteTitle}) =>
     const list = ["page-2", "page-3"];
 
     return (
-        <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `rebeccapurple`}}>
+        <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `#3c5a8c`}}>
             <div style={styles.headerDiv}>
                 <h1 style={{margin: 0}}>
-                    <Link to="/" style={{color: `white`, textDecoration: `none`, fontSize: "1.5rem"}}>
+                    <Link to="/" style={{color: `#bed7f6`, textDecoration: `none`, fontSize: "1.5rem"}}>
                         {siteTitle}
                     </Link>
                 </h1>
@@ -77,10 +77,10 @@ const styles = {
         }
     }),
     activeLink: {
-        color: "red",
+        color: "white",
     },
     linkStyle: {
-        color: `white`,
+        color: `#bed7f6`,
         textDecoration: `none`
     }
 };

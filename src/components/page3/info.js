@@ -5,7 +5,7 @@ const Info = ({startClicked, handleStart, initialValue, onchange1}) =>
 {
     return (
         <div className={styles.info}>
-            <button style={{width: 80, height: 30}} onClick={handleStart}>
+            <button style={{width: 80}} onClick={handleStart}>
                 {startClicked ? "Init" : "Start"}
             </button>
             <div className={styles.control}>
@@ -43,6 +43,6 @@ const styles = {
     }),
     select: {
         marginLeft: 10,
-        width: 60,
+        minWidth: 60
     },
 };
