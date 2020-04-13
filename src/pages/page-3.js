@@ -123,7 +123,7 @@ class ThirdPage extends React.Component
     {
         this.setState(state =>
         {
-            if (state.delta2 < state.initialDelta1 && state.marginLeft2 + state.delta2 < 100)
+            if (state.delta2 + this.dDelta < state.initialDelta1 && state.marginLeft2 + state.delta2 < 100)
             {
                 this.requestRef2.current = requestAnimationFrame(this.start2);
                 return {

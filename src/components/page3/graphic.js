@@ -56,13 +56,12 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
                         dataKey="time"
                         type="number"
                         interval={0}
-                        domain={[0, 10]}
+                        domain={[0, 6]}
                         tick={<CustomizedAxisTick axis="x"/>}
                     />
                     <YAxis
-                        label="V"
                         type="number"
-                        domain={[-(Math.round(initialDelta1) + 1), (Math.round(initialDelta1) + 1)]}
+                        domain={[-Math.ceil(initialDelta1), Math.ceil(initialDelta1)]}
                         strokeWidth="0.5px"
                         stroke="#6a8fb7"
                         interval={0}

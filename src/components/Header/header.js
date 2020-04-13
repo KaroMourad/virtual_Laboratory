@@ -1,12 +1,12 @@
 import {Link} from "gatsby"
 import React from "react"
-import {style} from "typestyle"
-import {HEADER_WIDTH} from "./layout";
+import {HEADER_WIDTH} from "../layout";
+import "./header.css"
 
 const Header = ({siteTitle}) =>
 {
     const list = ["page-2", "page-3"];
-
+    const renderList = getList(list);
     return (
         <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `#3c5a8c`}}>
             <div style={styles.headerDiv}>
@@ -15,8 +15,8 @@ const Header = ({siteTitle}) =>
                         {siteTitle}
                     </Link>
                 </h1>
-                <ul className={styles.listCont}>
-                    {getList(list)}
+                <ul className="listCont">
+                    {renderList}
                 </ul>
             </div>
         </header>
@@ -52,30 +52,6 @@ const styles = {
         display: "flex",
         flexDirection: "column",
     },
-    listCont: style({
-        margin: "50px 0 20px 0",
-        color: "white",
-        flex: 1,
-        overflow: "auto",
-        "$nest": {
-            "& > li": {
-                boxShadow: "0 1px 0 #fff",
-                borderRadius: 2,
-                paddingBottom: "0.5rem",
-                margin: "10px 10px 10px 0",
-                paddingLeft: 10,
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
-            },
-            "& > li:hover": {
-                boxShadow: "0px 0px 5px 0px #ffffff"
-            },
-            "& > li > a": {
-                display: "block"
-            }
-        }
-    }),
     activeLink: {
         color: "white",
     },

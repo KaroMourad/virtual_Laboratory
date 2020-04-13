@@ -9,8 +9,8 @@ const Animation = ({marginLeft1, marginLeft2}) =>
                 <div style={styles.cont1}>
                     <div className={styles.ball1}
                          style={{
-                             marginLeft: `${marginLeft1}%`,
-                             transform: `rotateZ(${3 * 360 / 100 * marginLeft1}deg)`
+                             marginLeft: `${100 - marginLeft1}%`,
+                             transform: `rotateZ(${-3 * 360 / 100 * marginLeft1}deg)`
                          }}>
                         1
                     </div>
