@@ -16,11 +16,11 @@ const Animation = ({marginLeft1, marginLeft2}) =>
                     </div>
                 </div>
             </div>
-            <div style={styles.contAnimControl}>
+            <div style={Object.assign({}, styles.contAnimControl, {marginLeft: 40})}>
                 <div style={styles.cont2}>
                     <div className={styles.ball2}
                          style={{
-                             marginLeft: `${marginLeft2}%`,
+                             marginLeft: `calc(${marginLeft2}% - 40px)`,
                              transform: `rotateZ(${3 * 360 / 100 * marginLeft2}deg)`
                          }}>
                         2
@@ -37,24 +37,25 @@ const styles = {
     animContainer: style({
         width: "100%",
         height: "40%",
+        boxShadow: "2px 1px 8px #888888",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
     }),
     contAnimControl: {
         display: "inline-flex",
-        width: "100%",
+        width: "40%",
         alignItems: "center",
-        marginTop: 40
     },
     cont1: {
         position: "relative",
-        width: "60%",
-        left: "3%",
+        width: "100%",
         borderBottom: "1px solid black",
         height: 40,
     },
     cont2: {
         position: "relative",
-        width: "60%",
-        left: "3%",
+        width: "100%",
         borderBottom: "1px solid black",
         height: 40,
     },
