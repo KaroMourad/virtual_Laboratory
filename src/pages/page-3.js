@@ -43,8 +43,8 @@ class ThirdPage extends React.Component
                     restart: false
                 });
                 this.timeStart = Date.now();
-                this.requestRef1.current = requestAnimationFrame(this.start1);
-                this.requestRef2.current = requestAnimationFrame(this.start2)
+                this.requestRef2.current = setTimeout(this.start2, 20);
+                this.requestRef1.current = setTimeout(this.start1, 20);
             } else
             {
                 this.init();
@@ -68,13 +68,13 @@ class ThirdPage extends React.Component
                             restart={restart}
                         />
                         <Info
-                            handleStart={this.handleStart}
-                            startClicked={startClicked}
-                            initialValue={initialDelta1}
-                            onchange1={this.onchange1}
                         />
                     </div>
                     <Animation
+                        handleStart={this.handleStart}
+                        startClicked={startClicked}
+                        initialValue={initialDelta1}
+                        onchange1={this.onchange1}
                         marginLeft1={marginLeft1}
                         marginLeft2={marginLeft2}
                     />
@@ -104,7 +104,7 @@ class ThirdPage extends React.Component
         {
             if (state.delta1 > 0 && state.marginLeft1 + state.delta1 < 100)
             {
-                this.requestRef1.current = requestAnimationFrame(this.start1);
+                this.requestRef1.current = setTimeout(this.start1, 20);
                 return {
                     marginLeft1: state.marginLeft1 + state.delta1,
                     delta1: state.delta1 - this.dDelta
@@ -125,7 +125,7 @@ class ThirdPage extends React.Component
         {
             if (state.delta2 + this.dDelta < state.initialDelta1 && state.marginLeft2 + state.delta2 < 100)
             {
-                this.requestRef2.current = requestAnimationFrame(this.start2);
+                this.requestRef2.current = setTimeout(this.start2, 20);
                 return {
                     marginLeft2: state.marginLeft2 + state.delta2,
                     delta2: state.delta2 + this.dDelta
@@ -157,8 +157,10 @@ class ThirdPage extends React.Component
 
     cancelAnimation = () =>
     {
-        cancelAnimationFrame(this.requestRef1.current);
-        cancelAnimationFrame(this.requestRef2.current);
+        clearTimeout(this.requestRef1.current);
+        clearTimeout(this.requestRef2.current);
+        this.requestRef1.current = 0;
+        this.requestRef2.current = 0;
     }
 }
 

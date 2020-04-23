@@ -3,7 +3,7 @@ import Layout, {HEADER_WIDTH} from "../components/layout"
 import SEO from "../components/seo"
 import Car from "../images/car.jpg"
 import Info from "../components/page2/info";
-import Control from "../components/page2/control";
+import {AnimationControl} from "../components/page2/animationControl";
 
 const initialCircleVel = 16;
 const initialCarVel = 7;
@@ -79,21 +79,20 @@ class SecondPage extends React.Component
                         ref={this.canvasRef}
                         width={width}
                         height={height}
-                        style={{border: "1px solid #000000"}}
+                        style={styles.canvas}
                     >
                         CANVAS DOES NOT SUPPORTED!
                     </canvas>
                     {width && height ? (
                         <>
-                            <Control
-                                height={height}
+                            <AnimationControl
                                 circleDelta={circleDelta}
                                 carDelta={carDelta}
                                 startClicked={startClicked}
                                 handleChangeRange={this.handleChangeRange}
                                 handleStart={this.handleStart}
                             />
-                            <Info circleDelta={circleDelta}/>
+                            <Info height={height}/>
                         </>
                     ) : null}
                 </div>
@@ -228,7 +227,7 @@ class SecondPage extends React.Component
             }
             /*width height canvas*/
             this.initialWidth = (window_width - HEADER_WIDTH - 20);
-            this.initialHeight = (window_height * 7 / 10);
+            this.initialHeight = (window_height / 2);
 
             this.initialWidth = this.initialWidth < 800 ? 780 : this.initialWidth;
 
@@ -256,5 +255,10 @@ const styles = {
         position: "relative",
         width: "100%",
         height: "100%",
+    },
+    canvas: {
+        boxShadow: "inset 0px 0px 3px 0px #888888",
+        marginLeft: 10,
+        borderRadius: 2
     }
 };

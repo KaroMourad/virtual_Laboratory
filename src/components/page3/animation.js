@@ -1,10 +1,30 @@
 import React from "react";
 import {style} from "typestyle";
 
-const Animation = ({marginLeft1, marginLeft2}) =>
+const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initialValue, onchange1}) =>
 {
     return (
         <div className={styles.animContainer}>
+            <div style={{position: "absolute", top: 0, left: 0, marginTop: 20}}>
+                <button style={{width: 80, marginLeft: 20,}} onClick={handleStart}>
+                    {startClicked ? "Init" : "Start"}
+                </button>
+                <div className={styles.control}>
+                    <label htmlFor="vel1">Choose the initial velocity of 1st ball:</label>
+                    <select id="vel1"
+                            style={styles.select}
+                            value={initialValue}
+                            onChange={onchange1}
+                            disabled={startClicked}>
+                        <option>0.75</option>
+                        <option>1</option>
+                        <option>1.25</option>
+                        <option>1.5</option>
+                        <option>1.75</option>
+                        <option>2</option>
+                    </select>
+                </div>
+            </div>
             <div style={styles.contAnimControl}>
                 <div style={styles.cont1}>
                     <div className={styles.ball1}
@@ -37,10 +57,13 @@ const styles = {
     animContainer: style({
         width: "100%",
         height: "40%",
-        boxShadow: "2px 1px 8px #888888",
+        boxShadow: "inset 0px 0px 3px #888888",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        position: "relative",
+        borderRadius: 4,
+        background: "#f3f3f3",
     }),
     contAnimControl: {
         display: "inline-flex",
@@ -81,4 +104,17 @@ const styles = {
         background: "green",
         borderRadius: "50%",
     }),
+    control: style({
+        display: "inline-block",
+        marginLeft: 20,
+        "$nest": {
+            "& > label": {
+                fontSize: 16
+            }
+        }
+    }),
+    select: {
+        marginLeft: 10,
+        minWidth: 60
+    },
 };
