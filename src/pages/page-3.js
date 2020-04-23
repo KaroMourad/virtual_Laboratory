@@ -33,6 +33,11 @@ class ThirdPage extends React.Component
         this.timeStart = 0;
     }
 
+    componentDidMount()
+    {
+        window.addEventListener("blur", this.onBlurEffect);
+    }
+
     componentDidUpdate(prevProps, prevState)
     {
         if (prevState.startClicked !== this.state.startClicked)
@@ -50,6 +55,12 @@ class ThirdPage extends React.Component
                 this.init();
             }
         }
+    }
+
+    componentWillUnmount()
+    {
+        this.init();
+        window.removeEventListener("blur", this.onBlurEffect);
     }
 
     render()
@@ -82,6 +93,14 @@ class ThirdPage extends React.Component
             </Layout>
         );
     };
+
+    onBlurEffect = (e) =>
+    {
+        if (this.state.marginLeft2 !== 100)
+        {
+            this.init();
+        }
+    }
 
     onchange1 = (e) =>
     {
@@ -152,6 +171,7 @@ class ThirdPage extends React.Component
             marginLeft1: 0,
             marginLeft2: 0,
             restart: true,
+            startClicked: false,
         });
     }
 

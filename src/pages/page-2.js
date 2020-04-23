@@ -64,6 +64,7 @@ class SecondPage extends React.Component
 
     componentWillUnmount()
     {
+        this.init();
         window.removeEventListener("resize", this.updateSize);
     }
 
