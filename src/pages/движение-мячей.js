@@ -2,11 +2,11 @@ import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import {style} from "typestyle";
-import Graphic from "../components/page3/graphic";
-import Info from "../components/page3/info";
-import Animation from "../components/page3/animation";
+import Graphic from "../components/BallsMovement/graphic";
+import Info from "../components/BallsMovement/info";
+import Animation from "../components/BallsMovement/animation";
 
-class ThirdPage extends React.Component
+class BallsMovement extends React.Component
 {
     requestRef1;
     requestRef2;
@@ -68,7 +68,7 @@ class ThirdPage extends React.Component
         const {initialDelta1, marginLeft1, marginLeft2, startClicked, delta1, delta2, restart} = this.state;
         return (
             <Layout>
-                <SEO title="Page three"/>
+                <SEO title="Движение мячей"/>
                 <div className={styles.container}>
                     <div className={styles.graphicContainer}>
                         <Graphic
@@ -183,7 +183,7 @@ class ThirdPage extends React.Component
     }
 }
 
-export default ThirdPage;
+export default BallsMovement;
 
 const styles = {
     container: style({

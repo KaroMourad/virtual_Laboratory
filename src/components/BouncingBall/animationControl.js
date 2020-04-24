@@ -11,7 +11,7 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                 </button>
                 <div className={styles.rangeContainer}>
                     <div>
-                        <label htmlFor="ball">ball velocity</label>:
+                        <label htmlFor="ball">скорость мяча</label>:
                         <input
                             id="ball"
                             type="range"
@@ -25,7 +25,7 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                         <span>{circleDelta}</span>
                     </div>
                     <div>
-                        <label htmlFor="car">car velocity</label>:
+                        <label htmlFor="car">скор. авт/мяч</label>:
                         <input
                             id="car"
                             type="range"
@@ -42,12 +42,18 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
             </div>
             <div className={styles.aboutDelta}>
                 <div>
-                    <span>before hit</span>:
-                    <span>Vb = V0 {circleDelta > 0 ? ` = ${circleDelta}` : ""}</span>
+                    <span>m = 5,</span>
+                    <span style={{marginLeft: 25}}>M = m * </span>
+                    <select style={{marginLeft: 5}}>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>5</option>
+                        <option>&#8734;</option>
+                    </select>
                 </div>
                 <div>
-                    <span>after hit</span>:
-                    <span>Vb = - (V0 - 2*Vc) {circleDelta > 0 ? "" : ` = ${circleDelta}`}</span>
+                    <span>v՛ = ,</span>
+                    <span>V՛ = </span>
                 </div>
             </div>
         </div>
@@ -72,7 +78,7 @@ const styles = {
     aboutDelta: style({
         boxShadow: "rgb(136, 136, 136) -1px 1px 3px 0px",
         borderRadius: 2,
-        padding: "10px 0 10px 10px",
+        padding: "10px 10px 10px 10px",
         marginRight: 11,
         background: "white",
         display: "inline-block",
@@ -85,12 +91,10 @@ const styles = {
             },
             "& > div > span:first-child": {
                 textAlign: "right",
-                width: 100
             },
             "& > div > span:last-child": {
                 textAlign: "left",
                 marginLeft: 10,
-                width: 220
             }
         }
     }),

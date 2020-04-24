@@ -2,8 +2,8 @@ import React from "react"
 import Layout, {HEADER_WIDTH} from "../components/layout"
 import SEO from "../components/seo"
 import Car from "../images/car.jpg"
-import Info from "../components/page2/info";
-import {AnimationControl} from "../components/page2/animationControl";
+import Info from "../components/BouncingBall/info";
+import {AnimationControl} from "../components/BouncingBall/animationControl";
 import {style} from "typestyle";
 
 const initialCircleVel = 16;
@@ -17,7 +17,7 @@ const initialCarHeight = 100;
 const border = 100;
 let time = 0;
 
-class SecondPage extends React.Component
+class BouncingBall extends React.Component
 {
     canvasRef;
     ctx;
@@ -74,7 +74,7 @@ class SecondPage extends React.Component
         const {width, height, startClicked, carDelta, circleDelta} = this.state;
         return (
             <Layout>
-                <SEO title="Page two"/>
+                <SEO title="Отскакивающий мяч"/>
                 <div id="canvasContainer" className={styles.canvasContainer}>
                     <canvas
                         id="myCanvas"
@@ -250,7 +250,7 @@ class SecondPage extends React.Component
     };
 }
 
-export default SecondPage;
+export default BouncingBall;
 
 const styles = {
     canvasContainer: style({

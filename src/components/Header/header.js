@@ -5,7 +5,7 @@ import "./header.css"
 
 const Header = ({siteTitle}) =>
 {
-    const list = ["page-2", "page-3"];
+    const list = ["отскакивающий-мяч", "движение-мячей"];
     const renderList = getList(list);
     return (
         <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `#3c5a8c`}}>
@@ -27,15 +27,14 @@ const Header = ({siteTitle}) =>
         return list.map(item =>
         {
             return (
-                <li key={item}>
-                    <Link
-                        to={`/${item}`}
-                        style={styles.linkStyle}
-                        activeStyle={styles.activeLink}
-                    >
-                        {item}
-                    </Link>
-                </li>
+                <Link
+                    key={item}
+                    to={`/${item}`}
+                    style={styles.linkStyle}
+                    activeStyle={styles.activeLink}
+                >
+                    {`${item.split("-")[0]} ${item.split("-")[1]}`}
+                </Link>
             );
         });
     }
@@ -54,10 +53,23 @@ const styles = {
     },
     activeLink: {
         color: "white",
+        boxShadow: "rgb(255, 255, 255) -1px 0px 0px 1px",
+        borderRight: "5px solid #5ea501",
     },
     linkStyle: {
+        transition: "all 0.2s",
+        display: "block",
         color: `#bed7f6`,
-        textDecoration: `none`
+        textDecoration: `none`,
+        boxShadow: "0 1px 0 #fff",
+        borderRadius: "2px",
+        paddingBottom: "0.3rem",
+        margin: "10px 10px 10px 0",
+        paddingTop: "0.3rem",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        textTransform: "capitalize",
     }
 };
 
