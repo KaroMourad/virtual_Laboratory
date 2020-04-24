@@ -34,7 +34,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
 
     return (
         <div className={styles.graphic}>
-            V(t)
+            <span style={{paddingLeft: 20}}>V(t)</span>
             <ResponsiveContainer width="90%" height="90%">
                 <AreaChart data={data} margin={{top: 15, right: 10, bottom: 0, left: -15}}>
                     <defs>
@@ -96,8 +96,11 @@ export default Graphic;
 
 const styles = {
     graphic: style({
-        marginLeft: 20,
-        flex: 1
+        flex: 1,
+        margin: "0 10px 10px 0",
+        background: "white",
+        boxShadow: "rgb(136, 136, 136) 0px 0px 3px 0px",
+        borderRadius: "2px",
     }),
 };
 

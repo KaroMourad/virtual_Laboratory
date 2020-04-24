@@ -4,8 +4,8 @@ import {style} from "typestyle";
 export const AnimationControl = ({handleStart, startClicked, handleChangeRange, circleDelta, carDelta}) =>
 {
     return (
-        <div style={styles.animControlCont}>
-            <div style={styles.control}>
+        <div className={styles.animControlCont}>
+            <div className={styles.control}>
                 <button style={styles.button} onClick={handleStart}>
                     {startClicked ? "Init" : "Start"}
                 </button>
@@ -15,7 +15,7 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                         <input
                             id="ball"
                             type="range"
-                            min="1"
+                            min="0"
                             max="20"
                             step="1"
                             style={{margin: "0 10px"}}
@@ -55,28 +55,27 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
 };
 
 const styles = {
-    animControlCont: {
-        top: 0,
-        position: "absolute",
+    animControlCont: style({
         width: "100%",
         display: "flex",
         justifyContent: "space-between"
-    },
-    control: {
+    }),
+    control: style({
         display: "inline-block",
         verticalAlign: "top",
         padding: "10px 10px 10px 0",
         marginLeft: 11,
         boxShadow: "rgb(136, 136, 136) 1px 1px 3px 0px",
         borderRadius: 2,
-        background: "#f3f3f3",
-    },
+        background: "white",
+    }),
     aboutDelta: style({
         boxShadow: "rgb(136, 136, 136) -1px 1px 3px 0px",
         borderRadius: 2,
         padding: "10px 0 10px 10px",
         marginRight: 11,
-        background: "#f3f3f3",
+        background: "white",
+        display: "inline-block",
         "$nest": {
             "& > div": {
                 display: "flex"

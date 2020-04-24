@@ -78,8 +78,7 @@ class ThirdPage extends React.Component
                             initialDelta1={initialDelta1}
                             restart={restart}
                         />
-                        <Info
-                        />
+                        <Info/>
                     </div>
                     <Animation
                         handleStart={this.handleStart}
@@ -191,10 +190,11 @@ const styles = {
         padding: 10,
         width: "100%",
         height: "100%",
+        background: "#e7ebf1",
     }),
     graphicContainer: style({
         width: "100%",
         height: "60%",
-        display: "flex"
+        display: "flex",
     })
 };

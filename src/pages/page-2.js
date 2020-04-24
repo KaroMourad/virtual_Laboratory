@@ -4,6 +4,7 @@ import SEO from "../components/seo"
 import Car from "../images/car.jpg"
 import Info from "../components/page2/info";
 import {AnimationControl} from "../components/page2/animationControl";
+import {style} from "typestyle";
 
 const initialCircleVel = 16;
 const initialCarVel = 7;
@@ -74,7 +75,7 @@ class SecondPage extends React.Component
         return (
             <Layout>
                 <SEO title="Page two"/>
-                <div id="canvasContainer" style={styles.canvasContainer}>
+                <div id="canvasContainer" className={styles.canvasContainer}>
                     <canvas
                         id="myCanvas"
                         ref={this.canvasRef}
@@ -228,7 +229,7 @@ class SecondPage extends React.Component
             }
             /*width height canvas*/
             this.initialWidth = (window_width - HEADER_WIDTH - 20);
-            this.initialHeight = (window_height / 2);
+            this.initialHeight = (window_height * 2 / 5);
 
             this.initialWidth = this.initialWidth < 800 ? 780 : this.initialWidth;
 
@@ -252,14 +253,15 @@ class SecondPage extends React.Component
 export default SecondPage;
 
 const styles = {
-    canvasContainer: {
-        position: "relative",
+    canvasContainer: style({
         width: "100%",
         height: "100%",
-    },
+        background: "#3c5a8c1f",
+    }),
     canvas: {
         boxShadow: "inset 0px 0px 3px 0px #888888",
         marginLeft: 10,
-        borderRadius: 2
+        borderRadius: 2,
+        background: "white",
     }
 };

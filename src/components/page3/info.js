@@ -1,7 +1,7 @@
 import React from 'react';
 import {style} from "typestyle";
 
-const Info = ({startClicked, handleStart, initialValue, onchange1}) =>
+const Info = (props) =>
 {
     return (
         <div className={styles.info}>
@@ -35,12 +35,15 @@ export default Info;
 
 const styles = {
     info: style({
+        background: "white",
+        boxShadow: "rgb(136, 136, 136) 0px 0px 3px 0px",
         textAlign: "justify",
         flex: 1,
-        marginBottom: 20,
+        marginBottom: "10px",
         overflowY: "auto",
-        paddingRight: 20,
-        paddingTop: 20,
+        padding: 20,
+        overflowX: "hidden",
+        borderRadius: "2px",
         $nest: {
             "& > div": {
                 display: "flex",

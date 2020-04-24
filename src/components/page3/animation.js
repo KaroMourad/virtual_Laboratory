@@ -63,7 +63,7 @@ const styles = {
         justifyContent: "center",
         position: "relative",
         borderRadius: 4,
-        background: "#f3f3f3",
+        background: "white",
     }),
     contAnimControl: {
         display: "inline-flex",
