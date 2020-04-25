@@ -5,7 +5,7 @@ import "./header.css"
 
 const Header = ({siteTitle}) =>
 {
-    const list = ["отскакивающий-мяч", "движение-мячей"];
+    const list = ["bouncingBall-Столкновение мяча и автомобиля", "ballsMovement-Вывод формулы пути при равномерном движении"];
     const renderList = getList(list);
     return (
         <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `#3c5a8c`}}>
@@ -28,12 +28,12 @@ const Header = ({siteTitle}) =>
         {
             return (
                 <Link
-                    key={item}
-                    to={`/${item}`}
+                    key={item.split("-")[0]}
+                    to={`/${item.split("-")[0]}`}
                     style={styles.linkStyle}
                     activeStyle={styles.activeLink}
                 >
-                    {`${item.split("-")[0]} ${item.split("-")[1]}`}
+                    {item.split("-")[1]}
                 </Link>
             );
         });
@@ -68,8 +68,7 @@ const styles = {
         paddingTop: "0.3rem",
         overflow: "hidden",
         textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-        textTransform: "capitalize",
+        // whiteSpace: "nowrap",
     }
 };
 

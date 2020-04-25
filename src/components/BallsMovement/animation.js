@@ -10,7 +10,8 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                     {startClicked ? "Init" : "Start"}
                 </button>
                 <div className={styles.control}>
-                    <label htmlFor="vel1">Choose the initial velocity of 1st ball:</label>
+                    Начальная скорость |
+                    <label htmlFor="vel1">первого мяча:</label>
                     <select id="vel1"
                             style={styles.select}
                             value={initialValue}
@@ -23,6 +24,7 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                         <option>1.75</option>
                         <option>2</option>
                     </select>
+                    <label>второго мяча: <span>{0}</span></label>
                 </div>
             </div>
             <div style={styles.contAnimControl}>
@@ -109,7 +111,7 @@ const styles = {
         marginLeft: 20,
         "$nest": {
             "& > label": {
-                fontSize: 16
+                marginLeft: 10
             }
         }
     }),

@@ -78,7 +78,7 @@ class BouncingBall extends React.Component
         const {width, height, startClicked, carDelta, circleDelta, deltaM, initialCircleVel, initialCarVel} = this.state;
         return (
             <Layout>
-                <SEO title="Отскакивающий мяч"/>
+                <SEO title="Столкновение мяча и автомобиля"/>
                 <div id="canvasContainer" className={styles.canvasContainer}>
                     <canvas
                         id="myCanvas"

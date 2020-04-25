@@ -2,27 +2,46 @@ import React, {useEffect, useState} from 'react';
 import {style} from "typestyle";
 import {Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
-const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
+const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}) =>
 {
     const [data, setData] = useState([]);
+    const [checked, setChecked] = useState(false);
 
     useEffect(() =>
     {
         if (restart)
         {
-            setData([{
-                time: 0,
-                V1: -Math.round(velocity1 * 1000) / 1000,
-                V2: Math.round(velocity2 * 1000) / 1000
-            }]);
+            const V1 = -Math.round(velocity1 * 1000) / 1000;
+            const V2 = Math.round(velocity2 * 1000) / 1000;
+            const newObj = {
+                t: 0,
+            };
+            if (checked)
+            {
+                newObj["S"] = 0
+            } else
+            {
+                newObj["V1"] = V1;
+                newObj["V2"] = V2;
+            }
+            setData([newObj]);
         } else
         {
-            let newDataItem = {
-                time: timeStart ? (Date.now() - timeStart) / 1000 : 0,
-                V1: -Math.round(velocity1 * 1000) / 1000,
-                V2: Math.round(velocity2 * 1000) / 1000
+            const V1 = -Math.round(velocity1 * 1000) / 1000;
+            const V2 = Math.round(velocity2 * 1000) / 1000;
+            const t = timeStart ? (Date.now() - timeStart) / 1000 : 0;
+            const newObj = {
+                t: +t.toFixed(3),
             };
-            setData([...data, newDataItem]);
+            if (checked)
+            {
+                newObj["S"] = +(initialDelta1 * t / 2).toFixed(3)
+            } else
+            {
+                newObj["V1"] = +V1.toFixed(3);
+                newObj["V2"] = +V2.toFixed(3);
+            }
+            setData([...data, newObj]);
         }
     }, [velocity1, velocity2])
 
@@ -32,11 +51,27 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
     const color2 = "#82ca9d";
     const id2 = "vel2";
 
+    const color3 = "#ffc800";
+    const id3 = "s";
+
+    const onChangeChecked = () =>
+    {
+        setChecked(state => !state);
+        init();
+    }
+
+    const toggle = (
+        <label className="toggle">
+            <input type="checkbox" onChange={onChangeChecked} checked={checked}/>
+            <span className="slider"/>
+        </label>
+    );
+
     return (
         <div className={styles.graphic}>
-            <span style={{paddingLeft: 20}}>V(t)</span>
+            <div style={{paddingLeft: 20, height: 30, display: "flex", alignItems: "flex-end"}}>V(t) {toggle} S(t)</div>
             <ResponsiveContainer width="90%" height="90%">
-                <AreaChart data={data} margin={{top: 15, right: 10, bottom: 0, left: -15}}>
+                <AreaChart data={data} margin={{top: 25, right: 10, bottom: 0, left: -15}}>
                     <defs>
                         <linearGradient id={id1} x1="0" y1="0" x2="0" y2="1">
                             <stop offset="5%" stopColor={color1} stopOpacity={0.8}/>
@@ -49,11 +84,17 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
                             <stop offset="95%" stopColor={color2} stopOpacity={0}/>
                         </linearGradient>
                     </defs>
+                    <defs>
+                        <linearGradient id={id3} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor={color3} stopOpacity={0.8}/>
+                            <stop offset="95%" stopColor={color3} stopOpacity={0}/>
+                        </linearGradient>
+                    </defs>
                     <XAxis
-                        label="time"
+                        label="t"
                         strokeWidth="0.5px"
                         stroke="#6a8fb7"
-                        dataKey="time"
+                        dataKey="t"
                         type="number"
                         interval={0}
                         domain={[0, 6]}
@@ -61,17 +102,24 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart}) =>
                     />
                     <YAxis
                         type="number"
-                        domain={[-Math.ceil(initialDelta1), Math.ceil(initialDelta1)]}
+                        domain={[-Math.ceil(initialDelta1 + (checked ? 2 : 0)), Math.ceil(initialDelta1 + (checked ? 2 : 0))]}
                         strokeWidth="0.5px"
                         stroke="#6a8fb7"
                         interval={0}
                         tick={<CustomizedAxisTick axis="y"/>}
                     />
                     <CartesianGrid strokeDasharray="1 1" strokeWidth="0.5px"/>
-                    <Tooltip labelFormatter={(value) => `time: ${value} s`}/>
+                    <Tooltip labelFormatter={(value) => `t: ${value} s`}/>
                     <ReferenceLine y={0} stroke="red"/>
-                    <ReferenceLine y={initialDelta1} stroke="blue"/>
-                    <ReferenceLine x={data[data.length - 1]?.time || 0} stroke="blue"/>
+                    <ReferenceLine y={checked ? data[data.length - 1]?.S : initialDelta1} stroke="blue"/>
+                    <ReferenceLine x={data[data.length - 1]?.t || 0} stroke="blue"/>
+                    <Area
+                        type="monotone"
+                        dataKey="S"
+                        stroke={color3}
+                        fillOpacity={1}
+                        fill={`url(#${id3})`}
+                    />
                     <Area
                         type="monotone"
                         dataKey="V1"

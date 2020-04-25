@@ -584,3 +584,52 @@ pre tt:after {
         font-size: 100%;
     }
 }
+
+/**************** Toggle ***********/
+.toggle > input {
+    display: none;
+}
+
+/* The container and background */
+.toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 20px;
+    margin: 0 15px;
+}
+
+.toggle > .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #8cbc13;
+    border: 1px solid #aaa;
+    border-radius: 16px;
+    transition: all 0.4s;
+}
+
+/* The sliding button */
+.toggle > .slider:before {
+    position: absolute;
+    content: "";
+    width: 16px;
+    height: 16px;
+    left: 1px;
+    top: 1px;
+    background-color: #eee;
+    border-radius: 16px;
+    transition: all 0.4s;
+}
+
+/* On checked */
+.toggle > input:checked + .slider {
+    background-color: #bc2612;
+}
+
+.toggle > input:checked + .slider:before {
+    transform: translateX(30px);
+}

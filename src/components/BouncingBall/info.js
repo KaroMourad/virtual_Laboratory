@@ -64,7 +64,7 @@ export default Info;
 const styles = {
     info: style({
         background: "white",
-        boxShadow: "rgb(136, 136, 136) 0px 0px 3px 0px",
+        boxShadow: "inset rgb(136, 136, 136) 0px 0px 3px 0px",
         textAlign: "justify",
         flex: 1,
         overflowY: "auto",

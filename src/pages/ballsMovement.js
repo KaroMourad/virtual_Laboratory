@@ -68,7 +68,7 @@ class BallsMovement extends React.Component
         const {initialDelta1, marginLeft1, marginLeft2, startClicked, delta1, delta2, restart} = this.state;
         return (
             <Layout>
-                <SEO title="Движение мячей"/>
+                <SEO title="Вывод формулы пути при равномерном движении"/>
                 <div className={styles.container}>
                     <div className={styles.graphicContainer}>
                         <Graphic
@@ -77,6 +77,7 @@ class BallsMovement extends React.Component
                             timeStart={this.timeStart}
                             initialDelta1={initialDelta1}
                             restart={restart}
+                            init={this.init}
                         />
                         <Info/>
                     </div>
