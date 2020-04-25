@@ -1,7 +1,7 @@
 import React from 'react';
 import {style} from "typestyle";
 
-export const AnimationControl = ({handleStart, startClicked, handleChangeRange, circleDelta, carDelta}) =>
+export const AnimationControl = ({handleStart, startClicked, handleChangeRange, deltaM, onChangeDeltaM, circleDelta, carDelta, initialCarVel, initialCircleVel}) =>
 {
     return (
         <div className={styles.animControlCont}>
@@ -11,53 +11,79 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                 </button>
                 <div className={styles.rangeContainer}>
                     <div>
-                        <label htmlFor="ball">скорость мяча</label>:
+                        <label htmlFor="ball">начальная ск. мяча (v)</label>:
                         <input
                             id="ball"
                             type="range"
                             min="0"
                             max="20"
                             step="1"
-                            style={{margin: "0 10px"}}
+                            disabled={startClicked}
+                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1}}
                             onChange={handleChangeRange}
-                            value={circleDelta}
+                            value={initialCircleVel}
                         />
-                        <span>{circleDelta}</span>
+                        <span>{initialCircleVel}</span>
                     </div>
                     <div>
-                        <label htmlFor="car">скор. авт/мяч</label>:
+                        <label htmlFor="car">начальная ск. авт/мяча (V)</label>:
                         <input
                             id="car"
                             type="range"
                             min="0"
                             max="20"
                             step="1"
-                            style={{margin: "0 10px"}}
+                            disabled={startClicked}
+                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1}}
                             onChange={handleChangeRange}
-                            value={carDelta}
+                            value={initialCarVel}
                         />
-                        <span>{carDelta}</span>
+                        <span>{initialCarVel}</span>
                     </div>
                 </div>
             </div>
             <div className={styles.aboutDelta}>
                 <div>
                     <span>m = 5,</span>
-                    <span style={{marginLeft: 25}}>M = m * </span>
-                    <select style={{marginLeft: 5}}>
+                    <label htmlFor="deltaM" style={{marginLeft: 15}}>M = m * </label>
+                    <select
+                        id="deltaM"
+                        value={deltaM}
+                        onChange={onChangeDeltaM}
+                        disabled={startClicked}
+                        style={{marginLeft: 5}}
+                    >
                         <option>1</option>
                         <option>2</option>
                         <option>5</option>
-                        <option>&#8734;</option>
+                        <option>1000</option>
                     </select>
                 </div>
                 <div>
-                    <span>v՛ = ,</span>
-                    <span>V՛ = </span>
+                    <span style={{fontWeight: "bold"}}>v՛ &asymp; {getValues().v1},</span>
+                    <span style={{fontWeight: "bold"}}>V՛ &asymp; {getValues().V1},</span>
+                    <span>V<sub>ц</sub> &asymp; {getValues().Vc}</span>
                 </div>
             </div>
         </div>
     );
+
+    function getValues()
+    {
+        const m = 5;
+        const M = m * deltaM;
+        const v = initialCircleVel; //16
+        const V = initialCarVel; //7
+        const Vc = (m * v + M * V) / (m + M); // 8.5
+
+        const v1 = -v + 2 * Vc;
+        const V1 = -V + 2 * Vc;
+        return {
+            v1: v <= V ? Infinity : Math.round(v1),
+            V1: v <= V ? Infinity : Math.round(V1),
+            Vc: Math.round(Vc)
+        };
+    }
 };
 
 const styles = {
@@ -89,13 +115,12 @@ const styles = {
             "& > div:last-child": {
                 paddingTop: 10
             },
-            "& > div > span:first-child": {
-                textAlign: "right",
+            "& > div > span": {
+                marginLeft: 15,
             },
-            "& > div > span:last-child": {
-                textAlign: "left",
-                marginLeft: 10,
-            }
+            "& > div > span:first-child": {
+                marginLeft: 0
+            },
         }
     }),
     button: {
@@ -116,7 +141,7 @@ const styles = {
                 paddingTop: 10
             },
             "& > div > label": {
-                minWidth: 120,
+                minWidth: 230,
                 textAlign: "right"
             },
             "& > div > span": {
