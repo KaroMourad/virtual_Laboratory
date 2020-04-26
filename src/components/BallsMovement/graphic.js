@@ -106,7 +106,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
                             </linearGradient>
                         </defs>
                         <XAxis
-                            label="t"
+                            label={{value: 'time', position: 'insideBottomRight', offset: 35}}
                             strokeWidth="0.5px"
                             stroke="#6a8fb7"
                             dataKey="t"
