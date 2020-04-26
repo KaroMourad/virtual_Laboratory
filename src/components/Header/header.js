@@ -29,7 +29,7 @@ const Header = ({siteTitle}) =>
             return (
                 <Link
                     key={item.split("-")[0]}
-                    to={`/${item.split("-")[0]}/`}
+                    to={`/${item.split("-")[0]}`}
                     style={styles.linkStyle}
                     activeStyle={styles.activeLink}
                 >
