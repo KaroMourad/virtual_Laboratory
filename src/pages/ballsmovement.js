@@ -6,7 +6,7 @@ import Graphic from "../components/BallsMovement/graphic";
 import Info from "../components/BallsMovement/info";
 import Animation from "../components/BallsMovement/animation";
 
-class BallsMovement extends React.Component
+class Ballsmovement extends React.Component
 {
     requestRef1;
     requestRef2;
@@ -184,7 +184,7 @@ class BallsMovement extends React.Component
     }
 }
 
-export default BallsMovement;
+export default Ballsmovement;
 
 const styles = {
     container: style({

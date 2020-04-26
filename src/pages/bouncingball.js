@@ -14,7 +14,7 @@ const initialCarHeight = 100;
 const border = 100;
 let time = 0;
 
-class BouncingBall extends React.Component
+class Bouncingball extends React.Component
 {
 
     canvasRef;
@@ -296,7 +296,7 @@ class BouncingBall extends React.Component
     };
 }
 
-export default BouncingBall;
+export default Bouncingball;
 
 const styles = {
     canvasContainer: style({

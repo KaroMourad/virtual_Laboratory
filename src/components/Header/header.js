@@ -5,7 +5,7 @@ import "./header.css"
 
 const Header = ({siteTitle}) =>
 {
-    const list = ["bouncingBall-Столкновение мяча и автомобиля", "ballsMovement-Вывод формулы пути при равномерном движении"];
+    const list = ["bouncingball-Столкновение мяча и автомобиля", "ballsmovement-Вывод формулы пути при равномерном движении"];
     const renderList = getList(list);
     return (
         <header style={{width: HEADER_WIDTH, minWidth: HEADER_WIDTH, background: `#3c5a8c`}}>
