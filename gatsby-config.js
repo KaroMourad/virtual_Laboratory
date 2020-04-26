@@ -30,7 +30,8 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-brotli',
             options: {
-                path: 'brotli'
+                path: 'brotli',
+                extensions: ['css', 'html', 'js', 'svg']
             }
         },
         `gatsby-plugin-minify`,
