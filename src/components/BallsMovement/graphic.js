@@ -112,12 +112,12 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
                             dataKey="t"
                             type="number"
                             interval={0}
-                            domain={[0, 6]}
+                            domain={[0, 6 + (checked ? 2 : 0)]}
                             tick={<CustomizedAxisTick axis="x"/>}
                         />
                         <YAxis
                             type="number"
-                            domain={[-Math.ceil(initialDelta1 + (checked ? 2 : 0)), Math.ceil(initialDelta1 + (checked ? 2 : 0))]}
+                            domain={[-Math.ceil(initialDelta1 + (checked ? 3 : 0)), Math.ceil(initialDelta1 + (checked ? 3 : 0))]}
                             strokeWidth="0.5px"
                             stroke="#6a8fb7"
                             interval={0}

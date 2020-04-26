@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: `Виртуальная Лаборатория`,
-        description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
+        description: `Виртуальная Лаборатория приготовлена для школьников.`,
         author: `@gatsbyjs`,
     },
     plugins: [
