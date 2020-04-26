@@ -68,7 +68,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
     );
 
     return (
-        <div className={styles.graphic}>
+        <div className={styles.graphic} style={{width: "calc( 50% - 5px)", height: "calc(100% - 10px"}}>
             <div style={{paddingLeft: 20, height: 30, display: "flex", alignItems: "flex-end"}}>V(t) {toggle} S(t)</div>
             <div style={{minWidth: 320, minHeight: 300, width: "90%", height: "90%"}}>
                 <ResponsiveContainer width="100%" height="100%">
@@ -146,11 +146,12 @@ export default Graphic;
 
 const styles = {
     graphic: style({
-        flex: 1,
+        verticalAlign: "top",
         margin: "0 10px 10px 0",
         background: "white",
         boxShadow: "rgb(136, 136, 136) 0px 0px 3px 0px",
         borderRadius: "2px",
+        display: "inline-block"
     }),
 };
 

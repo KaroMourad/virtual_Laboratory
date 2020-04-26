@@ -4,7 +4,7 @@ import {style} from "typestyle";
 const Info = (props) =>
 {
     return (
-        <div className={styles.info}>
+        <div className={styles.info} style={{width: "calc( 50% - 5px)", height: "calc(100% - 10px"}}>
             Обычно формулу пути, пройденном телом при равноускоренном или равнозамедленном
             движении в школьных учебниках выводят, используя идею интегрирования – делят весь путь на
             равные малые отрезки, и скорость при прохождении каждого отрезка приближенно считают
@@ -34,10 +34,11 @@ export default Info;
 
 const styles = {
     info: style({
+        verticalAlign: "top",
+        display: "inline-block",
         background: "white",
         boxShadow: "inset rgb(136, 136, 136) 0px 0px 3px 0px",
         textAlign: "justify",
-        flex: 1,
         marginBottom: "10px",
         overflowY: "auto",
         padding: 20,
