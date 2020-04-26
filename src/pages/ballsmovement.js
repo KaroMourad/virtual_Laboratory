@@ -1,7 +1,6 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import {style} from "typestyle";
 import Graphic from "../components/BallsMovement/graphic";
 import Info from "../components/BallsMovement/info";
 import Animation from "../components/BallsMovement/animation";
@@ -69,8 +68,8 @@ class Ballsmovement extends React.Component
         return (
             <Layout>
                 <SEO title="Вывод формулы пути при равномерном движении"/>
-                <div className={styles.container}>
-                    <div className={styles.graphicContainer}>
+                <div style={styles.container}>
+                    <div style={styles.graphicContainer}>
                         <Graphic
                             velocity1={delta1}
                             velocity2={delta2}
@@ -187,14 +186,14 @@ class Ballsmovement extends React.Component
 export default Ballsmovement;
 
 const styles = {
-    container: style({
+    container: {
         padding: 10,
         width: "100%",
         height: "100%",
         background: "#e7ebf1",
-    }),
-    graphicContainer: style({
+    },
+    graphicContainer: {
         width: "100%",
         height: "60%",
-    })
+    },
 };

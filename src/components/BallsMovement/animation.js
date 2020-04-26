@@ -4,7 +4,7 @@ import {style} from "typestyle";
 const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initialValue, onchange1}) =>
 {
     return (
-        <div className={styles.animContainer}>
+        <div style={styles.animContainer}>
             <div style={{position: "absolute", top: 0, left: 0, marginTop: 20}}>
                 <button style={{width: 80, marginLeft: 20,}} onClick={handleStart}>
                     {startClicked ? "Init" : "Start"}
@@ -56,7 +56,7 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
 export default Animation;
 
 const styles = {
-    animContainer: style({
+    animContainer: {
         width: "100%",
         height: "40%",
         boxShadow: "inset 0px 0px 3px #888888",
@@ -66,7 +66,7 @@ const styles = {
         position: "relative",
         borderRadius: 4,
         background: "white",
-    }),
+    },
     contAnimControl: {
         display: "inline-flex",
         width: "40%",

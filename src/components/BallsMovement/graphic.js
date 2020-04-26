@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {style} from "typestyle";
 import {Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}) =>
@@ -66,10 +65,25 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
             <span className="slider"/>
         </label>
     );
-
     return (
-        <div className={styles.graphic} style={{width: "calc(50% - 5px)", height: "calc(100% - 10px"}}>
-            <div style={{paddingLeft: 20, height: 30, display: "flex", alignItems: "flex-end"}}>V(t) {toggle} S(t)</div>
+        <div style={{
+            width: "calc(50% - 5px)",
+            height: "calc(100% - 10px)",
+            verticalAlign: "top",
+            margin: "0 10px 10px 0",
+            background: "white",
+            boxShadow: "inset rgb(136, 136, 136) 0px 0px 3px 0px",
+            borderRadius: "2px",
+            display: "inline-block"
+        }}>
+            <div style={{
+                paddingLeft: 20,
+                height: 30,
+                display: "flex",
+                alignItems: "flex-end"
+            }}>
+                V(t) {toggle} S(t)
+            </div>
             <div style={{minWidth: 320, minHeight: 300, width: "90%", height: "90%"}}>
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={data} margin={{top: 25, right: 10, bottom: 0, left: -15}}>
@@ -144,17 +158,6 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
 };
 
 export default Graphic;
-
-const styles = {
-    graphic: style({
-        verticalAlign: "top",
-        margin: "0 10px 10px 0",
-        background: "white",
-        boxShadow: "rgb(136, 136, 136) 0px 0px 3px 0px",
-        borderRadius: "2px",
-        display: "inline-block"
-    }),
-};
 
 const CustomizedAxisTick = (props) =>
 {
