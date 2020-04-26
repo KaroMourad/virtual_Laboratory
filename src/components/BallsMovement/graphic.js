@@ -68,7 +68,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
     );
 
     return (
-        <div className={styles.graphic} style={{width: "calc( 50% - 5px)", height: "calc(100% - 10px"}}>
+        <div className={styles.graphic} style={{width: "calc(50% - 5px)", height: "calc(100% - 10px"}}>
             <div style={{paddingLeft: 20, height: 30, display: "flex", alignItems: "flex-end"}}>V(t) {toggle} S(t)</div>
             <div style={{minWidth: 320, minHeight: 300, width: "90%", height: "90%"}}>
                 <ResponsiveContainer width="100%" height="100%">
@@ -112,7 +112,8 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
                         <CartesianGrid strokeDasharray="1 1" strokeWidth="0.5px"/>
                         <Tooltip labelFormatter={(value) => `t: ${value} s`}/>
                         <ReferenceLine y={0} stroke="red"/>
-                        <ReferenceLine y={checked ? data[data.length - 1]?.S : initialDelta1} stroke="blue"/>
+                        <ReferenceLine y={checked ? data[data.length - 1]?.S : data[data.length - 1]?.V2}
+                                       stroke="blue"/>
                         <ReferenceLine x={data[data.length - 1]?.t || 0} stroke="blue"/>
                         <Area
                             type="monotone"
