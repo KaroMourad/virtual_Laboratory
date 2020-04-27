@@ -79,8 +79,8 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
         const v1 = -v + 2 * Vc;
         const V1 = -V + 2 * Vc;
         return {
-            v1: v <= V ? Infinity : Math.round(v1),
-            V1: v <= V ? Infinity : Math.round(V1),
+            v1: v <= V ? <span>&#8734;</span> : Math.round(v1),
+            V1: v <= V ? <span>&#8734;</span> : Math.round(V1),
             Vc: Math.round(Vc)
         };
     }
