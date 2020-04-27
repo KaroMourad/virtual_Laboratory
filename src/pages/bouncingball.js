@@ -303,6 +303,7 @@ const styles = {
         width: "100%",
         height: "100%",
         background: "#3c5a8c1f",
+        padding: "10px 0 6px 0",
     }),
     canvas: {
         boxShadow: "inset 0px 0px 3px 0px #888888",

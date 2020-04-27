@@ -108,7 +108,7 @@ const styles = {
         boxShadow: "0 1px 0 #fff",
         borderRadius: "2px",
         paddingBottom: "0.3rem",
-        margin: "10px 0",
+        margin: "20px 0",
         paddingTop: "0.3rem",
         paddingLeft: "10px",
         overflow: "hidden",

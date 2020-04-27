@@ -18,6 +18,7 @@
     z-index: 10;
     background: #3c5a8c;
     transition: 0.2s all;
+    height: 100%;
 }
 
 /******************* burger*/
@@ -26,7 +27,7 @@
     height: 3em;
     width: 3em;
     position: absolute;
-    top: 90%;
+    top: 83%;
     right: -2em;
     background: #3c5a8c;
     display: inline-flex;

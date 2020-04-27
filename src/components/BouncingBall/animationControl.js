@@ -19,7 +19,7 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                             max="20"
                             step="1"
                             disabled={startClicked}
-                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1}}
+                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1, maxWidth: "130px"}}
                             onChange={handleChangeRange}
                             value={initialCircleVel}
                         />
@@ -34,7 +34,7 @@ export const AnimationControl = ({handleStart, startClicked, handleChangeRange, 
                             max="20"
                             step="1"
                             disabled={startClicked}
-                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1}}
+                            style={{margin: "0 10px", opacity: startClicked ? 0.5 : 1, maxWidth: "130px"}}
                             onChange={handleChangeRange}
                             value={initialCarVel}
                         />
