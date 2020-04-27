@@ -3,7 +3,6 @@ import {graphql, useStaticQuery} from "gatsby"
 
 import Header from "./Header/header"
 import "./layout.css"
-import {style} from "typestyle";
 
 export const HEADER_WIDTH = 230;
 
@@ -24,9 +23,6 @@ const Layout = ({children}) =>
             <Header siteTitle={data.site.siteMetadata.title}/>
             <div style={styles.layoutContent}>
                 <main style={styles.main}> {children} </main>
-                <footer className={styles.footer}>
-                    © {new Date().getFullYear()}
-                </footer>
             </div>
         </div>
     )
@@ -42,7 +38,7 @@ const styles = {
         position: "relative",
     },
     layoutContent: {
-        width: `calc(100% - ${HEADER_WIDTH}px)`,
+        width: `100%`,
         height: "100%",
         overflow: "auto"
     },
@@ -52,12 +48,5 @@ const styles = {
         minHeight: 600,
         minWidth: 800,
         overflow: "hidden"
-    },
-    footer: style({
-        position: "absolute",
-        bottom: 0,
-        left: HEADER_WIDTH / 2,
-        transform: "translateX(-50%)",
-        color: "white"
-    })
+    }
 };

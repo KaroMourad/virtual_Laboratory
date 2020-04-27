@@ -6,7 +6,7 @@ import SEO from "../components/seo"
 const IndexPage = () => (
     <Layout>
         <SEO title="Home"/>
-        <div>
+        <div style={{padding: 10}}>
             Мурадян Карапет Багратуниевич
         </div>
     </Layout>

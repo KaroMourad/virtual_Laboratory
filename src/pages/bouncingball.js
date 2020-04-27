@@ -274,7 +274,7 @@ class Bouncingball extends React.Component
                 window_height = 600;
             }
             /*width height canvas*/
-            this.initialWidth = (window_width - HEADER_WIDTH - 20);
+            this.initialWidth = (window_width - (window_width >= 1040 ? HEADER_WIDTH : 0) - 20);
             this.initialHeight = (window_height * 2 / 5);
 
             this.initialWidth = this.initialWidth < 780 ? 780 : this.initialWidth;
