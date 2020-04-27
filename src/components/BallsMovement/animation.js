@@ -37,6 +37,10 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                         1
                     </div>
                 </div>
+                <div className={styles.arrow}
+                     style={{right: "calc(50% + 20px)", width: `${(100 - marginLeft1) * initialValue}px`}}>
+                    <i className="arrow arrow_left" style={{left: "-2px"}}/>
+                </div>
             </div>
             <div style={Object.assign({}, styles.contAnimControl, {marginLeft: 40})}>
                 <div style={styles.cont2}>
@@ -47,6 +51,9 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                          }}>
                         2
                     </div>
+                </div>
+                <div className={styles.arrow} style={{width: `${marginLeft2 * initialValue}px`}}>
+                    <i className="arrow arrow_right" style={{left: "calc(100% - 8px)"}}/>
                 </div>
             </div>
         </div>
@@ -119,4 +126,10 @@ const styles = {
         marginLeft: 10,
         minWidth: 60
     },
+    arrow: style({
+        position: "absolute",
+        top: "70%",
+        height: 5,
+        background: "black"
+    })
 };
