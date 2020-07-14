@@ -23,6 +23,9 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                         <option>1.5</option>
                         <option>1.75</option>
                         <option>2</option>
+                        <option>2.25</option>
+                        <option>2.5</option>
+                        <option>3</option>
                     </select>
                     <label>второго мяча: <span>{0}</span></label>
                 </div>
@@ -60,7 +63,7 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
     );
 };
 
-export default Animation;
+export default React.memo(Animation);
 
 const styles = {
     animContainer: {

@@ -17,12 +17,12 @@ class Ballsmovement extends React.Component
         super(props);
 
         this.state = {
-            initialDelta1: 1.5,
+            initialDelta1: 2,
             initialDelta2: 0,
             startClicked: false,
             marginLeft1: 0,
             marginLeft2: 0,
-            delta1: 1.5,
+            delta1: 2,
             delta2: 0,
             restart: true,
         }

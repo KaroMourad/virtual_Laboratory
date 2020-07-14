@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
 const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}) =>
@@ -53,18 +53,23 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
     const color3 = "#ffc800";
     const id3 = "s";
 
-    const onChangeChecked = () =>
+    const onChangeChecked = useCallback(() =>
     {
         setChecked(state => !state);
         init();
-    }
+    }, [init]);
 
-    const toggle = (
-        <label className="toggle">
-            <input type="checkbox" onChange={onChangeChecked} checked={checked}/>
-            <span className="slider"/>
-        </label>
+    const toggle = useMemo(() =>
+        {
+            return (
+                <label className="toggle">
+                    <input type="checkbox" onChange={onChangeChecked} checked={checked}/>
+                    <span className="slider"/>
+                </label>
+            )
+        }, [checked, onChangeChecked]
     );
+
     return (
         <div style={{
             width: "calc(50% - 5px)",
@@ -159,7 +164,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
 
 export default Graphic;
 
-const CustomizedAxisTick = (props) =>
+const CustomizedAxisTick = React.memo((props) =>
 {
     const {x, y, payload, axis} = props;
     if (payload)
@@ -177,4 +182,4 @@ const CustomizedAxisTick = (props) =>
             </g>
         );
     }
-};
+});
