@@ -92,8 +92,6 @@ class Bouncingball extends React.Component
                     {width && height ? (
                         <>
                             <AnimationControl
-                                circleDelta={circleDelta}
-                                carDelta={carDelta}
                                 startClicked={startClicked}
                                 handleChangeRange={this.handleChangeRange}
                                 handleStart={this.handleStart}

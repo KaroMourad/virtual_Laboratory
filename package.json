@@ -22,7 +22,8 @@
     "typestyle": "^2.1.0"
   },
   "devDependencies": {
-    "prettier": "^2.0.4"
+    "prettier": "^2.0.4",
+    "use-resize-observer": "^6.1.0"
   },
   "keywords": [
     "gatsby"

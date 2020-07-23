@@ -1,8 +1,10 @@
 import React from "react";
 import {style} from "typestyle";
+import useResizeObserver from "use-resize-observer";
 
 const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initialValue, onchange1}) =>
 {
+    const {ref, width = 1} = useResizeObserver();
     return (
         <div style={styles.animContainer}>
             <div style={{position: "absolute", top: 0, left: 0, marginTop: 20}}>
@@ -17,7 +19,6 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                             value={initialValue}
                             onChange={onchange1}
                             disabled={startClicked}>
-                        <option>0.75</option>
                         <option>1</option>
                         <option>1.25</option>
                         <option>1.5</option>
@@ -30,12 +31,12 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                     <label>второго мяча: <span>{0}</span></label>
                 </div>
             </div>
-            <div style={styles.contAnimControl}>
+            <div ref={ref} style={styles.contAnimControl}>
                 <div style={styles.cont1}>
                     <div className={styles.ball1}
                          style={{
-                             marginLeft: `${100 - marginLeft1}%`,
-                             transform: `rotateZ(${-3 * 360 / 100 * marginLeft1}deg)`
+                             willChange: `${marginLeft1 === 100 ? "auto" : "transform, rotate"}`,
+                             transform: `translateX(${width - (width * marginLeft1) / 100}px) rotateZ(${-3 * 360 / 100 * marginLeft1}deg)`
                          }}>
                         1
                     </div>
@@ -49,8 +50,8 @@ const Animation = ({marginLeft1, marginLeft2, handleStart, startClicked, initial
                 <div style={styles.cont2}>
                     <div className={styles.ball2}
                          style={{
-                             marginLeft: `calc(${marginLeft2}% - 40px)`,
-                             transform: `rotateZ(${3 * 360 / 100 * marginLeft2}deg)`
+                             willChange: `${marginLeft2 === 100 ? "auto" : "transform, rotate"}`,
+                             transform: `translateX(${(width * marginLeft2) / 100 - 40}px) rotateZ(${3 * 360 / 100 * marginLeft2}deg) `
                          }}>
                         2
                     </div>

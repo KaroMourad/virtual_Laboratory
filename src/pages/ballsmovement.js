@@ -1,9 +1,9 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import Graphic from "../components/BallsMovement/graphic";
 import Info from "../components/BallsMovement/info";
 import Animation from "../components/BallsMovement/animation";
+import Graphic from "../components/BallsMovement/graphic";
 
 class Ballsmovement extends React.Component
 {
@@ -47,8 +47,10 @@ class Ballsmovement extends React.Component
                     restart: false
                 });
                 this.timeStart = Date.now();
-                this.requestRef2.current = setTimeout(this.start2, 20);
-                this.requestRef1.current = setTimeout(this.start1, 20);
+                window.clearTimeout(this.requestRef2.current);
+                window.clearTimeout(this.requestRef1.current);
+                this.requestRef2.current = window.setTimeout(this.start2, 21);
+                this.requestRef1.current = window.setTimeout(this.start1, 21);
             } else
             {
                 this.init();
@@ -71,9 +73,9 @@ class Ballsmovement extends React.Component
                 <div style={styles.container}>
                     <div style={styles.graphicContainer}>
                         <Graphic
-                            velocity1={delta1}
-                            velocity2={delta2}
-                            timeStart={this.timeStart}
+                            velocity1={Math.round(delta1 * 1000) / 1000}
+                            velocity2={Math.round(delta2 * 1000) / 1000}
+                            timeStart={this.timeStart ? (Date.now() - this.timeStart) / 1000 : 0}
                             initialDelta1={initialDelta1}
                             restart={restart}
                             init={this.init}
@@ -104,7 +106,7 @@ class Ballsmovement extends React.Component
     onchange1 = (e) =>
     {
         this.setState({
-            initialDelta1: +e.target.value,
+            initialDelta1: parseFloat(e.target.value),
             initialDelta2: 0
         }, this.init);
     }
@@ -122,7 +124,8 @@ class Ballsmovement extends React.Component
         {
             if (state.delta1 > 0 && state.marginLeft1 + state.delta1 < 100)
             {
-                this.requestRef1.current = setTimeout(this.start1, 20);
+                window.clearTimeout(this.requestRef1.current);
+                this.requestRef1.current = window.setTimeout(this.start1, 21);
                 return {
                     marginLeft1: state.marginLeft1 + state.delta1,
                     delta1: state.delta1 - this.dDelta
@@ -143,7 +146,8 @@ class Ballsmovement extends React.Component
         {
             if (state.delta2 + this.dDelta < state.initialDelta1 && state.marginLeft2 + state.delta2 < 100)
             {
-                this.requestRef2.current = setTimeout(this.start2, 20);
+                window.clearTimeout(this.requestRef2.current);
+                this.requestRef2.current = window.setTimeout(this.start2, 21);
                 return {
                     marginLeft2: state.marginLeft2 + state.delta2,
                     delta2: state.delta2 + this.dDelta
@@ -176,8 +180,8 @@ class Ballsmovement extends React.Component
 
     cancelAnimation = () =>
     {
-        clearTimeout(this.requestRef1.current);
-        clearTimeout(this.requestRef2.current);
+        window.clearTimeout(this.requestRef1.current);
+        window.clearTimeout(this.requestRef2.current);
         this.requestRef1.current = 0;
         this.requestRef2.current = 0;
     }

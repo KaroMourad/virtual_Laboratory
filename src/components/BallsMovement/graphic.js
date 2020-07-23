@@ -1,6 +1,15 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
 import {Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 
+const color1 = "#e9453b";
+const id1 = "vel1";
+
+const color2 = "#82ca9d";
+const id2 = "vel2";
+
+const color3 = "#ffc800";
+const id3 = "s";
+
 const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}) =>
 {
     const [data, setData] = useState([]);
@@ -8,50 +17,32 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
 
     useEffect(() =>
     {
+        const newObj = {t: 0};
         if (restart)
         {
-            const V1 = -Math.round(velocity1 * 1000) / 1000;
-            const V2 = Math.round(velocity2 * 1000) / 1000;
-            const newObj = {
-                t: 0,
-            };
             if (checked)
             {
                 newObj["S"] = 0
             } else
             {
-                newObj["V1"] = V1;
-                newObj["V2"] = V2;
+                newObj["V1"] = -velocity1;
+                newObj["V2"] = velocity2;
             }
             setData([newObj]);
         } else
         {
-            const V1 = -Math.round(velocity1 * 1000) / 1000;
-            const V2 = Math.round(velocity2 * 1000) / 1000;
-            const t = timeStart ? (Date.now() - timeStart) / 1000 : 0;
-            const newObj = {
-                t: +t.toFixed(3),
-            };
+            newObj["t"] = timeStart;
             if (checked)
             {
-                newObj["S"] = +(initialDelta1 * t / 2).toFixed(3)
+                newObj["S"] = parseFloat((initialDelta1 * timeStart / 2).toFixed(3))
             } else
             {
-                newObj["V1"] = +V1.toFixed(3);
-                newObj["V2"] = +V2.toFixed(3);
+                newObj["V1"] = -parseFloat(velocity1.toFixed(3));
+                newObj["V2"] = parseFloat(velocity2.toFixed(3));
             }
             setData([...data, newObj]);
         }
     }, [velocity1, velocity2])
-
-    const color1 = "#e9453b";
-    const id1 = "vel1";
-
-    const color2 = "#82ca9d";
-    const id2 = "vel2";
-
-    const color3 = "#ffc800";
-    const id3 = "s";
 
     const onChangeChecked = useCallback(() =>
     {
@@ -129,7 +120,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
                             tick={<CustomizedAxisTick axis="y"/>}
                         />
                         <CartesianGrid strokeDasharray="1 1" strokeWidth="0.5px"/>
-                        <Tooltip labelFormatter={(value) => `t: ${value} s`}/>
+                        {velocity1 === 0 ? <Tooltip labelFormatter={(value) => `t: ${value} s`}/> : null}
                         <ReferenceLine y={0} stroke="red"/>
                         <ReferenceLine y={checked ? data[data.length - 1]?.S : data[data.length - 1]?.V2}
                                        stroke="blue"/>
@@ -162,7 +153,7 @@ const Graphic = ({timeStart, velocity1, velocity2, initialDelta1, restart, init}
     );
 };
 
-export default Graphic;
+export default React.memo(Graphic);
 
 const CustomizedAxisTick = React.memo((props) =>
 {

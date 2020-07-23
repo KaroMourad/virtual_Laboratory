@@ -1,7 +1,7 @@
 import React from 'react';
 import {style} from "typestyle";
 
-export const AnimationControl = ({handleStart, startClicked, handleChangeRange, deltaM, onChangeDeltaM, circleDelta, carDelta, initialCarVel, initialCircleVel}) =>
+export const AnimationControl = ({handleStart, startClicked, handleChangeRange, deltaM, onChangeDeltaM, initialCarVel, initialCircleVel}) =>
 {
     return (
         <div className={styles.animControlCont}>
